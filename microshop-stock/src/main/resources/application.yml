@@ -1,0 +1,11 @@
+server.port: 8081
+
+spring:
+  application.name: stock
+  main.banner-mode: "off"
+
+logging.level:
+  ROOT: INFO
+  #org.springframework: INFO
+  #de.flapdoodle: INFO
+  #com.adeliosys: DEBUG
