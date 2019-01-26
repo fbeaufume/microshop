@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroshopOrderApplication {
+public class MicroshopOrder {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroshopOrderApplication.class, args);
+		SpringApplication.run(MicroshopOrder.class, args);
 	}
 }
