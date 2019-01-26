@@ -19,6 +19,7 @@
 
     <modules>
         <module>microshop-stock</module>
+        <module>microshop-order</module>
 	</modules>
 
     <dependencyManagement>
