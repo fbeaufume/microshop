@@ -1,7 +1,8 @@
 package com.adeliosys.microshop.stock.service;
 
+import com.adeliosys.microshop.common.exception.NotFoundException;
 import com.adeliosys.microshop.stock.model.Article;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.adeliosys.microshop.stock.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -11,24 +12,32 @@ import java.util.List;
 @Service
 public class ArticleService {
 
-    private MongoRepository repository;
+    private ArticleRepository repository;
 
-    public ArticleService(MongoRepository repository) {
+    public ArticleService(ArticleRepository repository) {
         this.repository = repository;
     }
 
     @PostConstruct
     public void initData() {
         List<Article> articles = Arrays.asList(
-                new Article(null, "Article 1", 100.0, 40),
-                new Article(null, "Article 2", 200.0, 80),
-                new Article(null, "Article 3", 300.0, 60)
+                new Article("1", "Article 1", 100.0, 40),
+                new Article("2", "Article 2", 200.0, 80),
+                new Article("3", "Article 3", 300.0, 60)
         );
 
         repository.saveAll(articles);
     }
 
-    public List getArticles() {
+    public List<Article> getArticles() {
         return repository.findAll();
+    }
+
+    public Article getArticle(String id) {
+        return repository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    public Article saveArticle(Article article) {
+        return repository.save(article);
     }
 }
