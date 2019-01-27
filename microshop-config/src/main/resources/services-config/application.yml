@@ -1,0 +1,9 @@
+# Common configuration for the services
+
+logging.level:
+  ROOT: INFO
+  #org.springframework: DEBUG
+  #org.springframework.cloud: DEBUG
+  #com.netflix: DEBUG
+  #com.netflix.hystrix: DEBUG
+  #com.adeliosys: DEBUG

@@ -1,0 +1,20 @@
+server.port: 8888
+
+spring:
+  application.name: registry
+  main.banner-mode: "off"
+  profiles:
+    # The "native" profile allows local configuration files for the config server
+    active: native
+  cloud.config.server:
+    # Uncomment to change the URL prefix of the config server, for example if embedded with the services registry
+    #prefix: /config
+    native.search-locations:
+    - file:./services-config
+    - classpath:/services-config
+
+logging.level:
+  ROOT: INFO
+  #org.springframework: DEBUG
+  #org.springframework.cloud: DEBUG
+  #com.adeliosys: DEBUG
