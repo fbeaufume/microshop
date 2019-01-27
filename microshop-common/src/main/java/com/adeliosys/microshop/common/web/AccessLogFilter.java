@@ -1,4 +1,4 @@
-package com.adeliosys.microshop.config.web;
+package com.adeliosys.microshop.common.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,16 +24,19 @@ public class AccessLogFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         long timestamp = System.currentTimeMillis();
-        filterChain.doFilter(servletRequest, servletResponse);
-
-        StringBuffer url = req.getRequestURL();
-        String queryString = req.getQueryString();
-        if (queryString != null) {
-            url.append('?').append(queryString);
+        try {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-        int status = res.getStatus();
+        finally {
+            StringBuffer url = req.getRequestURL();
+            String queryString = req.getQueryString();
+            if (queryString != null) {
+                url.append('?').append(queryString);
+            }
+            int status = res.getStatus();
 
-        LOGGER.info("Served {} '{}' as {} in {} msec", req.getMethod(), url, status, System.currentTimeMillis() - timestamp);
+            LOGGER.info("Served {} '{}' as {} in {} msec", req.getMethod(), url, status, System.currentTimeMillis() - timestamp);
+        }
     }
 
     @Override
