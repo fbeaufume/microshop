@@ -1,5 +1,12 @@
 # Common configuration for the services
 
+management:
+  endpoints:
+    web:
+      exposure:
+        # Change web exposed Actuators as needed, default value is: health,info
+        include: health,info
+
 logging.level:
   ROOT: INFO
   #org.springframework: DEBUG

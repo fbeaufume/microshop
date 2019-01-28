@@ -18,7 +18,7 @@ public class AccessLogFilter implements Filter {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessLogFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
