@@ -2,14 +2,17 @@ package com.adeliosys.microshop.common.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*")
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class AccessLogFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessLogFilter.class);
@@ -26,8 +29,7 @@ public class AccessLogFilter implements Filter {
         long timestamp = System.currentTimeMillis();
         try {
             filterChain.doFilter(servletRequest, servletResponse);
-        }
-        finally {
+        } finally {
             StringBuffer url = req.getRequestURL();
             String queryString = req.getQueryString();
             if (queryString != null) {
