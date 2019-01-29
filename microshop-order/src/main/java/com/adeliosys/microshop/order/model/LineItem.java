@@ -19,6 +19,15 @@ public class LineItem {
 
     int quantity;
 
+    public LineItem() {
+    }
+
+    public LineItem(String productId, double price, int quantity) {
+        this.productId = productId;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
     public Long getId() {
         return id;
     }

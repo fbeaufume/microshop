@@ -16,8 +16,17 @@ public class Order {
     private OrderStatus status;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "ORDER_ID")
     private List<LineItem> items;
+
+    public Order() {
+    }
+
+    public Order(String username, OrderStatus status, List<LineItem> items) {
+        this.username = username;
+        this.status = status;
+        this.items = items;
+    }
 
     public Long getId() {
         return id;
