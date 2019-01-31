@@ -46,7 +46,7 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     public Order getOrder(Long id) {
-        return repository.findById(id).orElseThrow(NotFoundException::new);
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(Order.class, id));
     }
 
     public Order saveOrder(Order order) {

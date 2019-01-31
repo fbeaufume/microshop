@@ -40,7 +40,7 @@ public class ArticleService {
     }
 
     public Article getArticle(String id) {
-        return repository.findById(id).orElseThrow(NotFoundException::new);
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(Article.class, id));
     }
 
     public Article saveArticle(Article article) {
