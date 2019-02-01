@@ -24,6 +24,7 @@
     <modules>
         <module>microshop-common</module>
         <module>microshop-config</module>
+        <module>microshop-registry</module>
         <module>microshop-stock</module>
         <module>microshop-order</module>
     </modules>

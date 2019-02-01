@@ -7,6 +7,12 @@ management:
         # Change web exposed Actuators as needed, default value is: health,info
         include: health,info
 
+# Registry client configuration
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
 logging.level:
   ROOT: INFO
   #org.springframework: DEBUG
