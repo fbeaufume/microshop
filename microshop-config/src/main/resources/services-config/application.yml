@@ -1,5 +1,9 @@
 # Common configuration for the services
 
+app:
+  accessLog:
+    threshold: 0
+
 management:
   endpoints:
     web:

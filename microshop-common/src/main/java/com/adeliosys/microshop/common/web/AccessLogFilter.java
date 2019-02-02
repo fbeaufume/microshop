@@ -2,6 +2,7 @@ package com.adeliosys.microshop.common.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,12 @@ public class AccessLogFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessLogFilter.class);
 
+    /**
+     * Minimum duration of logged request. A negative value means no logging.
+     */
+    @Value("${app.accessLog.threshold:-1}")
+    private int threshold;
+
     @Override
     public void init(FilterConfig filterConfig) {
     }
@@ -26,18 +33,22 @@ public class AccessLogFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
-        long timestamp = System.currentTimeMillis();
+        long duration = -System.currentTimeMillis();
         try {
             filterChain.doFilter(servletRequest, servletResponse);
         } finally {
-            StringBuffer url = req.getRequestURL();
-            String queryString = req.getQueryString();
-            if (queryString != null) {
-                url.append('?').append(queryString);
-            }
-            int status = res.getStatus();
+            duration += System.currentTimeMillis();
 
-            LOGGER.info("Served {} '{}' as {} in {} msec", req.getMethod(), url, status, System.currentTimeMillis() - timestamp);
+            if (threshold >= 0 && duration >= threshold) {
+                StringBuffer url = req.getRequestURL();
+                String queryString = req.getQueryString();
+                if (queryString != null) {
+                    url.append('?').append(queryString);
+                }
+                int status = res.getStatus();
+
+                LOGGER.info("Served {} '{}' as {} in {} msec", req.getMethod(), url, status, duration);
+            }
         }
     }
 
