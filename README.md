@@ -1,17 +1,29 @@
 # Microshop
 
 Microshop is a sample microservices application based on Spring technologies
-(Boot 2, Framework 5, Cloud, Data, etc).
+such as Boot 2, Framework 5, Cloud (Config, Netflix, Gateway), Data.
+
+## Features
+
+Currently implemented :
+- Two basic business services
+- Common utility module
+- Config server
+- Registry
+- Gateway
 
 ## Services
 
 The technical services:
 - `microshop-config`:
   - Config server, centralizes the configuration of the other services
-  - Spring Boot app on port `8888` by default
+  - Spring Boot app on port `8888` by default, based on Spring Cloud Config
 - `microshop-registry`:
   - Registry server, records instances of business services
-  - Spring Boot app on port `8761` by default
+  - Spring Boot app on port `8761` by default, based on Spring Cloud Netflix Eureka
+- `microshop-gateway`:
+  - Gateway, routes requests to business services
+  - Spring Boot app on port `8080` by default, based on Spring Cloud Gateway
 
 The business services:
 - `microshop-stock`:
@@ -31,14 +43,16 @@ Other modules:
 
 Build all modules with `mvn package` from the root folder,
 then execute each module with `mvn spring-boot:run` from its folder
-using this order: first `microshop-config`, then `microshop-registry` then the application services.
+using this order from first to last: `microshop-config`, `microshop-registry`,
+business services, `microshop-gateway`
 
 ## Next steps
 
 Not yet implemented:
 - Client load balancing
 - Circuit breaker
-- Gateway
 - Distributed tracing
 - Spring Boot Admin
-- Security
+- Hot configuration reload
+- Technical services security
+- Business services security

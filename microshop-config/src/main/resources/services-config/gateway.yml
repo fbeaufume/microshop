@@ -1,0 +1,22 @@
+server.port: 8080
+
+# Gateway configuration
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: stock
+        uri: lb://stock
+        predicates:
+        - Path=/stock/**
+        filters:
+        - RewritePath=/stock/(?<path>.*), /$\{path}
+      - id: order
+        uri: lb://order
+        predicates:
+        - Path=/order/**
+        filters:
+        - RewritePath=/order/(?<path>.*), /$\{path}
