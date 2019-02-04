@@ -14,11 +14,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
-        <!-- Finchley.SR1 brings: spring-cloud-commons 2.0.1, spring-cloud-config-server 2.0.1, etc -->
-        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
-        <!-- Edgware.SR5 brings: spring-cloud-commons 1.3.5, spring-cloud-config-server 1.4.5, etc -->
-        <!--<spring-cloud.version>Edgware.SR5</spring-cloud.version>-->
+        <!-- For dependencies between Spring Boot and Spring Cloud versions, see http://start.spring.io/actuator/info
+        or Spring Cloud release notes in https://github.com/spring-projects/spring-cloud/wiki -->
+        <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
 
     <modules>
@@ -27,6 +26,7 @@
         <module>microshop-registry</module>
         <module>microshop-stock</module>
         <module>microshop-order</module>
+        <module>microshop-gateway</module>
     </modules>
 
     <dependencyManagement>
