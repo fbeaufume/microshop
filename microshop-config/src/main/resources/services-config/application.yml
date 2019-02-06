@@ -9,8 +9,8 @@ management:
   endpoints:
     web:
       exposure:
-        # Change web exposed Actuators as needed, default value is: health,info
-        include: health,info
+        # Spring Boot Admin uses several Actuator endpoints
+        include: "*"
 
 # Registry client configuration
 eureka:

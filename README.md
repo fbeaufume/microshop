@@ -11,6 +11,7 @@ Currently implemented :
 - Config server
 - Registry
 - Gateway
+- Spring Boot Admin
 
 ## Services
 
@@ -24,6 +25,9 @@ The technical services:
 - `microshop-gateway`:
   - Gateway, routes requests to business services
   - Spring Boot app on port `8080` by default, based on Spring Cloud Gateway
+- `microshop-admin`:
+  - Admin interface for Spring Boot applications
+  - Spring Boot app on port `8090` by default, based on Spring Boot Admin
 
 The business services:
 - `microshop-stock`:
@@ -44,7 +48,7 @@ Other modules:
 Build all modules with `mvn package` from the root folder,
 then execute each module with `mvn spring-boot:run` from its folder
 using this order from first to last: `microshop-config`, `microshop-registry`,
-business services, `microshop-gateway`
+business services, `microshop-gateway`, `microshop-admin`
 
 ## Next steps
 
@@ -52,7 +56,6 @@ Not yet implemented:
 - Client load balancing
 - Circuit breaker
 - Distributed tracing
-- Spring Boot Admin
 - Hot configuration reload
 - Technical services security
 - Business services security
