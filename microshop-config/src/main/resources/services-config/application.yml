@@ -12,6 +12,14 @@ management:
         # Spring Boot Admin uses several Actuator endpoints
         include: "*"
 
+spring:
+  cloud:
+    config:
+      # Allow local configuration such as system properties, to override the server config, convenient for server.port
+      allowOverride: true
+      overrideNone: true
+      overrideSystemProperties: true
+
 # Registry client configuration
 eureka:
   instance:

@@ -26,6 +26,11 @@ public class ArticleController {
         return service.getArticle(id);
     }
 
+    @GetMapping("/articles/{id}/book")
+    public Article bookArticle(@PathVariable String id, @RequestParam(required = false, defaultValue = "1") int quantity) {
+        return service.bookArticle(id, quantity);
+    }
+
     @PutMapping("/articles")
     public Article updateArticle(@RequestBody Article article) {
         return service.saveArticle(article);

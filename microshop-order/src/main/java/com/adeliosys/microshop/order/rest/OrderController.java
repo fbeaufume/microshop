@@ -26,6 +26,6 @@ public class OrderController {
 
     @PostMapping("/orders")
     public Order createOrder(@RequestBody Order order) {
-        return service.saveOrder(order);
+        return service.createOrder(order);
     }
 }

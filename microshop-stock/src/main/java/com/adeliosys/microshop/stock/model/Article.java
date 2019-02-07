@@ -1,5 +1,6 @@
 package com.adeliosys.microshop.stock.model;
 
+import com.adeliosys.microshop.common.exception.NotEnoughException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -55,5 +56,15 @@ public class Article {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void decreaseQuantity(int quantity) {
+        // Check the remaining quantity
+        if (this.quantity < quantity) {
+            throw new NotEnoughException(Article.class);
+        }
+        else {
+            this.quantity -= quantity;
+        }
     }
 }
