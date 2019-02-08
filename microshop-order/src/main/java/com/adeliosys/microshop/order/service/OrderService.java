@@ -75,7 +75,7 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
             } catch (HttpClientErrorException e) {
                 throw new NotEnoughException(Article.class);
             } catch (RestClientException e) {
-                throw new ServerException("Failed to call the stock service");
+                throw new ServerException("Failed to call the stock service: " + e.toString());
             }
         }
 

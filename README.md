@@ -10,10 +10,11 @@ Currently implemented :
 - Two basic business services
 - Common utility module
 - Config server
-- Registry
+- Service registry
 - Gateway
 - Client load balancing
 - Circuit breaker
+- Distributed tracing
 - Spring Boot Admin
 
 ## Services
@@ -46,7 +47,7 @@ Other modules:
 - `microshop-common`:
   - Common utility classes
 
-Business URL:
+The business URL are available through the gateway, i.e. http://localhost:8080/ :
 
 Service | Method | Path | Description
 --------|--------|------|------------
@@ -71,7 +72,6 @@ To launch additional business service instances change the HTTP using for exampl
 ## Next steps
 
 Not yet implemented:
-- Distributed tracing
 - Hot configuration reload
 - Technical services security
 - Business services security

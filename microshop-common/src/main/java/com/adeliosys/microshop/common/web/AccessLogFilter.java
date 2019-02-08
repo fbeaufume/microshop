@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+// Should use the highest precedence possible, but lower than Spring CLoud Sleuth
+// (see org.springframework.cloud.sleuth.instrument.web.TraceWebServletAutoConfiguration)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1000)
 public class AccessLogFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessLogFilter.class);

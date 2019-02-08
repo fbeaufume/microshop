@@ -1,6 +1,5 @@
 package com.adeliosys.microshop.stock.service;
 
-import com.adeliosys.microshop.common.exception.NotEnoughException;
 import com.adeliosys.microshop.common.exception.NotFoundException;
 import com.adeliosys.microshop.stock.model.Article;
 import com.adeliosys.microshop.stock.repository.ArticleRepository;
