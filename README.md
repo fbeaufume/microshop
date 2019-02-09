@@ -3,7 +3,13 @@
 Microshop is a sample microservices application based on Spring technologies
 such as Boot 2, Framework 5, Cloud (Config, Netflix, Gateway), Data.
 
+Follows the "config first" (rather than "registry first") approach.
+Meaning that the business services first connect to the config server
+to get the location of the service registry, then connect to the service
+registry instead of the other way around.
+
 Requires Java 8+.
+
 ## Features
 
 Currently implemented :
