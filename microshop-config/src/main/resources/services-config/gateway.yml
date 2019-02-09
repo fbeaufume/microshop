@@ -7,16 +7,5 @@ spring:
       discovery:
         locator:
           enabled: true
-      routes:
-      - id: stock
-        uri: lb://stock
-        predicates:
-        - Path=/stock/**
-        filters:
-        - RewritePath=/stock/(?<path>.*), /$\{path}
-      - id: order
-        uri: lb://order
-        predicates:
-        - Path=/order/**
-        filters:
-        - RewritePath=/order/(?<path>.*), /$\{path}
+          # Eureka returns upper case service IDs by default
+          lowerCaseServiceId: true
