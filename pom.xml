@@ -14,7 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!-- For dependencies between Spring Boot and Spring Cloud versions, see http://start.spring.io/actuator/info
+        <!-- For relations between Spring Boot and Spring Cloud versions, see http://start.spring.io/actuator/info
         or Spring Cloud release notes in https://github.com/spring-projects/spring-cloud/wiki -->
         <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
@@ -29,6 +29,7 @@
         <module>microshop-order</module>
         <module>microshop-gateway</module>
         <module>microshop-admin</module>
+        <module>microshop-dashboard</module>
     </modules>
 
     <dependencyManagement>

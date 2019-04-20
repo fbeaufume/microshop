@@ -8,6 +8,7 @@ import com.adeliosys.microshop.order.model.LineItem;
 import com.adeliosys.microshop.order.model.Order;
 import com.adeliosys.microshop.order.model.OrderStatus;
 import com.adeliosys.microshop.order.repository.OrderRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -43,7 +44,7 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
 
         repository.deleteAll();
 
-        Order order = new Order("John Doe", OrderStatus.NEW,
+        Order order = new Order("John Doe", OrderStatus.VALIDATED,
                 Arrays.asList(
                         new LineItem("1", 10.0d, 1),
                         new LineItem("3", 100.0d, 1)));
@@ -61,8 +62,9 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     /**
      * Create a new order and update the stock.
      */
+    @HystrixCommand(fallbackMethod = "fallbackCreateOrder")
     public Order createOrder(Order order) {
-        order.setStatus(OrderStatus.NEW);
+        order.setStatus(OrderStatus.VALIDATED);
 
         // For each item, get the current price and update the stock count
         for (LineItem item : order.getItems()) {
@@ -80,5 +82,10 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
         }
 
         return repository.save(order);
+    }
+
+    public Order fallbackCreateOrder(Order order) {
+        order.setStatus(OrderStatus.NEW);
+        return order;
     }
 }
