@@ -12,6 +12,9 @@ management:
         # Spring Boot Admin uses several Actuator endpoints
         include: "*"
 
+# Each microservice uses its own session cookie name to prevent conflicts
+server.servlet.session.cookie.name: JSESSIONID_${spring.application.name}
+
 spring:
   cloud:
     config:

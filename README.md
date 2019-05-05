@@ -23,6 +23,7 @@ Currently implemented :
 - Circuit breaker dashboard, based on Spring Cloud Netflix Hystrix Dashboard
 - Distributed tracing, based on Spring Cloud Sleuth
 - Admin interface, based on Spring Boot Admin
+- Log HTTP requests slower than a configurable threshold
 
 ## Services
 
