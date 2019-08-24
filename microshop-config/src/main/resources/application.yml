@@ -5,7 +5,7 @@ app:
     threshold: 0
 
 spring:
-  application.name: registry
+  application.name: config
   main.banner-mode: "off"
   profiles:
     # The "native" profile allows local configuration files for the config server
@@ -14,8 +14,8 @@ spring:
     # Uncomment to change the URL prefix of the config server, for example if embedded with the services registry
     #prefix: /config
     native.search-locations:
-    - file:./services-config
-    - classpath:/services-config
+      - file:./services-config
+      - classpath:/services-config
 
 logging.level:
   ROOT: INFO

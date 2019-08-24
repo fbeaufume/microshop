@@ -22,7 +22,7 @@ public class AccessLogFilter implements GlobalFilter {
     /**
      * Minimum duration of logged request. A negative value means no logging.
      */
-    @Value("${app.accessLog.threshold:-1}")
+    @Value("${microshop.accessLog.threshold:-1}")
     private int threshold;
 
     @Override

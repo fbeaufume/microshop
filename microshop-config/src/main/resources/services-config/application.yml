@@ -1,9 +1,9 @@
 # Common configuration for the services
 
 # Application specific configuration
-app:
-  accessLog:
-    threshold: 0
+microshop:
+  accessLog.threshold: 0
+  methodTracing.enabled: true
 
 management:
   endpoints:
@@ -22,8 +22,15 @@ spring:
       allowOverride: true
       overrideNone: true
       overrideSystemProperties: true
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    # To use the Zipkin server without the service registry
+#    base-url: http://localhost:9411/
+    # To use the Zipkin server with the service registry
+    base-url: http://zipkin/
 
-# Registry client configuration
 eureka:
   instance:
     preferIpAddress: true

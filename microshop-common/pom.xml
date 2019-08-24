@@ -19,6 +19,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Distributed tracing -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!-- Uncomment to add relational database calls tracing -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.gavlyukovskiy</groupId>-->
+<!--            <artifactId>p6spy-spring-boot-starter</artifactId>-->
+<!--            <version>1.5.6</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

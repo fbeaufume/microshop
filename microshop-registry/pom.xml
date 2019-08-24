@@ -15,11 +15,6 @@
     <dependencies>
         <!-- Application libs -->
 
-        <dependency>
-            <groupId>com.adeliosys</groupId>
-            <artifactId>microshop-common</artifactId>
-        </dependency>
-
         <!-- Config server client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

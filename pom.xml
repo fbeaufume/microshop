@@ -30,6 +30,7 @@
         <module>microshop-gateway</module>
         <module>microshop-admin</module>
         <module>microshop-dashboard</module>
+        <module>microshop-zipkin</module>
     </modules>
 
     <dependencyManagement>

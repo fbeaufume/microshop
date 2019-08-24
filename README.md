@@ -1,29 +1,25 @@
 # Microshop
 
 Microshop is a sample microservices application based on Spring technologies
-such as Boot 2, Framework 5, Cloud (Config, Netflix, Gateway, etc), Data.
-
-Follows the "config first" (rather than "registry first") approach.
-Meaning that the business services first connect to the config server
-to get the location of the service registry, then connect to the service
-registry instead of the other way around.
+such as Boot 2, Framework 5, Cloud (Config, Netflix, Gateway, etc), Data
+and others.
 
 Requires Java 8+ and Maven 3.5+.
 
 ## Features
 
 Currently implemented :
-- Two basic business services
-- Common utility module
+- Two basic business services with an in-memory database (H2 and MongoDB)
+- Common utility module with logs of slow HTTP requests
 - Config server, based on Spring Cloud Config
 - Service registry, based on Spring Cloud Netflix Eureka
 - API gateway, based on Spring Cloud Gateway
 - Client load balancing, based on Spring Cloud Netflix Ribbon
 - Circuit breaker, based on Spring Cloud Netflix Hystrix
 - Circuit breaker dashboard, based on Spring Cloud Netflix Hystrix Dashboard
-- Distributed tracing, based on Spring Cloud Sleuth
+- Distributed tracing, based on Spring Cloud Zipkin and Zipkin server
+- Configurable tracing of business methods
 - Admin interface, based on Spring Boot Admin
-- Log HTTP requests slower than a configurable threshold
 
 ## Services
 
@@ -53,18 +49,44 @@ The technical services:
 - `microshop-dashboard`:
   - Optional Hystrix dashboard, displays circuit breakers stats
   - Spring Boot app on port `7979` by default, based on Spring Cloud Netflix Hystrix Dashboard
+- `microshop-zipkin`:
+  - Optional Zipkin UI, displays distributed traces
+  - Spring Boot app on port `9411` by default, based on Zipkin server
 
 Other modules:
 - `microshop-common`:
   - Common utility classes
 
+The rest of this document omits `microshop-`.
+
+Internal dependencies:
+
+Service   | Dependencies
+----------|--------------
+common    | -
+config    | -
+registry  | config (run)
+stock     | common (build), config (run), registry (run), zipkin (run)
+order     | common (build), config (run), registry (run), zipkin (run)
+gateway   | config (run), registry (run), zipkin (run)
+admin     | config (run), registry (run)
+dashboard | -
+zipkin    | registry (run)
+
+`build` means that this a build time dependency, `run` means that this is called
+(HTTP or other) during the service execution.
+
 ## Execution
+
+The application follows the "config first" (rather than "registry first") approach.
+Meaning that the business services first connect to the config server
+to get the location of the service registry, then connect to the service
+registry.
 
 Build all modules with `mvn package` from the root folder,
 then execute each module with `mvn spring-boot:run` (or `java -jar target/<service>.jar`)
-from its folder using this order from first to last: `microshop-config`,
-`microshop-registry`, business services, `microshop-gateway`, `microshop-admin`,
-`microshop-dashboard`.
+from its folder, using this order from first to last: `config` then
+`registry` then the rest in any order.
 
 To launch additional business service instances change the HTTP using for example
 `mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8083`
@@ -79,15 +101,17 @@ Stock   | GET    | /stock/api/articles/{id} | Get an article
 Stock   | PUT    | /stock/api/articles      | Update an article
 Order   | GET    | /order/api/orders        | Get all orders
 Order   | GET    | /order/api/orders/{id}   | Get an order
-Order   | POST   | /order/api/orders        | Create a new order if enough articles in stock
+Order   | POST   | /order/api/orders        | Create a new order and update the stock
 
 In addition the technical URL are:
 
-URL                           | Description
-------------------------------|------------
-http://localhost:8761/        | Service registry UI
-http://localhost:8090/        | Admin UI
-http://localhost:7979/hystrix | Hystrix Dashboard, use http://localhost:8081/actuator/hystrix.stream
+URL                                 | Description
+------------------------------------|------------
+http://localhost:8888/order/default | Configuration of the order service
+http://localhost:8761/              | Service registry UI
+http://localhost:8090/              | Spring Boot Admin UI
+http://localhost:7979/hystrix       | Hystrix Dashboard, then use http://localhost:8081/actuator/hystrix.stream
+http://localhost:9411/zipkin        | Zipkin UI
 
 ## Next steps
 
@@ -95,7 +119,7 @@ Not yet implemented:
 - Replace Ribbon by Spring Cloud Loadbalancer,
   see https://spring.io/blog/2018/12/12/spring-cloud-greenwich-rc1-available-now
   and https://piotrminkowski.wordpress.com/2019/04/05/the-future-of-spring-cloud-microservices-after-netflix-era/
-- Replace Hystrix by Resilience4j, see same links
+- Replace Hystrix by Resilience4j, see previous links
 - Hot configuration reload
 - Technical services security
 - Business services security

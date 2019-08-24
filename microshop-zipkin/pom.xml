@@ -9,39 +9,23 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>microshop-gateway</artifactId>
+    <artifactId>microshop-zipkin</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <!-- Application libs -->
 
+        <!-- Zipkin -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- Config server client -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>io.zipkin</groupId>
+            <artifactId>zipkin-server</artifactId>
+            <version>2.16.1</version>
         </dependency>
 
         <!-- Registry server client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
-        <!-- API gateway -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-
-        <!-- Distributed tracing -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
     </dependencies>
 
