@@ -66,8 +66,8 @@ Service   | Dependencies
 common    | -
 config    | -
 registry  | config (run)
-stock     | common (build), config (run), registry (run), zipkin (run)
 order     | common (build), config (run), registry (run), zipkin (run)
+stock     | common (build), config (run), registry (run), zipkin (run)
 gateway   | config (run), registry (run), zipkin (run)
 admin     | config (run), registry (run)
 dashboard | -
@@ -94,24 +94,27 @@ To launch additional business service instances change the HTTP using for exampl
 
 The business URL are available through the gateway, i.e. http://localhost:8080/ :
 
-Service | Method | Path                     | Description
---------|--------|--------------------------|------------
-Stock   | GET    | /stock/api/articles      | Get all articles
-Stock   | GET    | /stock/api/articles/{id} | Get an article
-Stock   | PUT    | /stock/api/articles      | Update an article
-Order   | GET    | /order/api/orders        | Get all orders
-Order   | GET    | /order/api/orders/{id}   | Get an order
-Order   | POST   | /order/api/orders        | Create a new order and update the stock
+Service | Method | Path               | Description
+--------|--------|--------------------|------------
+Order   | GET    | /api/orders        | Get all orders
+Order   | GET    | /api/orders/{id}   | Get an order
+Order   | POST   | /api/orders        | Create a new order and update the stock
+Stock   | GET    | /api/articles      | Get all articles
+Stock   | GET    | /api/articles/{id} | Get an article
+Stock   | PUT    | /api/articles      | Update an article
 
 In addition the technical URL are:
 
-URL                                 | Description
-------------------------------------|------------
-http://localhost:8888/order/default | Configuration of the order service
-http://localhost:8761/              | Service registry UI
-http://localhost:8090/              | Spring Boot Admin UI
-http://localhost:7979/hystrix       | Hystrix Dashboard, then use http://localhost:8081/actuator/hystrix.stream
-http://localhost:9411/zipkin        | Zipkin UI
+URL                                     | Description
+----------------------------------------|------------
+http://localhost:8888/order/default     | Configuration of Order
+http://localhost:8761/                  | Service registry UI
+http://localhost:8761/eureka/apps/order | Service registry records of Order
+http://localhost:8090/                  | Spring Boot Admin UI
+http://localhost:7979/hystrix           | Hystrix Dashboard, then use http://localhost:8081/actuator/hystrix.stream
+http://localhost:9411/zipkin            | Zipkin UI
+
+A Postman configuration file is also provided for convenience in the `postman` folder.
 
 ## Next steps
 

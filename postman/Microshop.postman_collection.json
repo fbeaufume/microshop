@@ -10,10 +10,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8888/registry/default",
 					"protocol": "http",
@@ -30,38 +26,10 @@
 			"response": []
 		},
 		{
-			"name": "Config - Stock",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8888/stock/default",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8888",
-					"path": [
-						"stock",
-						"default"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Config - Order",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8888/order/default",
 					"protocol": "http",
@@ -78,14 +46,30 @@
 			"response": []
 		},
 		{
+			"name": "Config - Stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/stock/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"stock",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Config - Gateway",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8888/gateway/default",
 					"protocol": "http",
@@ -102,23 +86,21 @@
 			"response": []
 		},
 		{
-			"name": "Registry",
+			"name": "Registry - Order",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://localhost:8761/",
+					"raw": "http://localhost:8761/eureka/apps/order",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8761",
 					"path": [
-						""
+						"eureka",
+						"apps",
+						"order"
 					]
 				}
 			},
@@ -129,10 +111,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8081/api/orders",
 					"protocol": "http",
@@ -153,10 +131,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8081/api/orders/1",
 					"protocol": "http",
@@ -187,7 +161,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"Jane Doe\",\n    \"items\": [\n        {\n            \"productId\": \"1\",\n            \"quantity\": 5\n        }\n    ]\n}"
+					"raw": "{\n    \"username\": \"John Doe\",\n    \"items\": [\n        {\n            \"productId\": \"1\",\n            \"quantity\": 0\n        }\n    ]\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8081/api/orders",
@@ -209,10 +183,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8082/api/articles",
 					"protocol": "http",
@@ -233,10 +203,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:8082/api/articles/1",
 					"protocol": "http",
@@ -289,19 +255,14 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://localhost:8080/order/api/orders",
+					"raw": "http://localhost:8080/api/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"order",
 						"api",
 						"orders"
 					]
@@ -323,7 +284,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"John Doe\",\n    \"status\": \"NEW\",\n    \"items\": [\n        {\n            \"productId\": \"1\",\n            \"price\": 100,\n            \"quantity\": 10\n        }\n    ]\n}"
+					"raw": "{\n    \"username\": \"John Doe\",\n    \"items\": [\n        {\n            \"productId\": \"1\",\n            \"quantity\": 0\n        }\n    ]\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/order/api/orders",
@@ -346,19 +307,14 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://localhost:8080/stock/api/articles",
+					"raw": "http://localhost:8080/api/articles",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stock",
 						"api",
 						"articles"
 					]
@@ -383,14 +339,13 @@
 					"raw": "{\n    \"id\": \"1\",\n    \"name\": \"Article 1\",\n    \"price\": 100,\n    \"quantity\": 5\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/stock/api/articles",
+					"raw": "http://localhost:8080/api/articles",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stock",
 						"api",
 						"articles"
 					]

@@ -9,3 +9,12 @@ spring:
           enabled: true
           # Eureka returns upper case service IDs by default
           lowerCaseServiceId: true
+      routes:
+        - id: orders-route
+          uri: lb://order/
+          predicates:
+            - Path=/api/orders/**
+        - id: articles-route
+          uri: lb://stock/
+          predicates:
+            - Path=/api/articles/**
