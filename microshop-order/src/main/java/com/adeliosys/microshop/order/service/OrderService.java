@@ -62,9 +62,10 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     /**
      * Create a new order and update the stock.
      */
-    @HystrixCommand(fallbackMethod = "fallbackCreateOrder")
+    @HystrixCommand(fallbackMethod = "createOrderFallback")
     public Order createOrder(Order order) {
         order.setStatus(OrderStatus.VALIDATED);
+        logOrderCreation(order);
 
         // For each item, get the current price and update the stock count
         for (LineItem item : order.getItems()) {
@@ -84,8 +85,13 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
         return repository.save(order);
     }
 
-    public Order fallbackCreateOrder(Order order) {
+    public Order createOrderFallback(Order order) {
         order.setStatus(OrderStatus.NEW);
-        return order;
+        logOrderCreation(order);
+        return repository.save(order);
+    }
+
+    private void logOrderCreation(Order order) {
+        LOGGER.info("Creating {} order with {} articles for '{}'", order.getStatus(), order.countItems(), order.getUsername());
     }
 }

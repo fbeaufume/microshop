@@ -59,4 +59,8 @@ public class Order {
     public void setItems(List<LineItem> items) {
         this.items = items;
     }
+
+    public int countItems() {
+        return items == null ? 0 : items.size();
+    }
 }

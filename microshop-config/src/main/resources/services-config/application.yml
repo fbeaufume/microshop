@@ -26,9 +26,9 @@ spring:
     sampler:
       probability: 1.0
   zipkin:
-    # To use the Zipkin server without the service registry
+    # Uncomment to use the Zipkin server without the service registry
 #    base-url: http://localhost:9411/
-    # To use the Zipkin server with the service registry
+    # Uncomment to use the Zipkin server with the service registry
     base-url: http://zipkin/
 
 eureka:
@@ -38,10 +38,13 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
-logging.level:
-  ROOT: INFO
-  #org.springframework: DEBUG
-  #org.springframework.cloud: DEBUG
-  #com.netflix: DEBUG
-  #com.netflix.hystrix: DEBUG
-  #com.adeliosys: DEBUG
+logging:
+  # Custom shorter pattern, uncomment if needed
+#  pattern.console: ${CONSOLE_LOG_PATTERN:%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(%-20.20logger{19}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+  level:
+    ROOT: INFO
+#    org.springframework: DEBUG
+#    org.springframework.cloud: DEBUG
+#    com.netflix: DEBUG
+#    com.netflix.hystrix: DEBUG
+#    com.adeliosys: DEBUG

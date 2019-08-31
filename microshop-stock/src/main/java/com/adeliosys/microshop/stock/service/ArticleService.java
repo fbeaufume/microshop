@@ -47,6 +47,7 @@ public class ArticleService {
      * Book articles, used when registering an order.
      */
     public Article bookArticle(String id, int quantity) {
+        LOGGER.info("Booking {} instance{} of article {}", quantity, quantity > 1 ? "s" : "", id);
         Article article = getArticle(id);
         article.decreaseQuantity(quantity); // Throws an exception if the stock is too low
         saveArticle(article);
