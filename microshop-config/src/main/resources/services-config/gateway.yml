@@ -6,7 +6,6 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
           # Eureka returns upper case service IDs by default
           lowerCaseServiceId: true
       routes:
