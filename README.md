@@ -92,16 +92,17 @@ To launch additional business service instances change the HTTP using for exampl
 `mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8083`
 (or `java -jar target/<service>.jar --server.port=8083`).
 
-The business URL are available through the gateway, i.e. http://localhost:8080/ :
+The business URL are:
 
-Service | Method | Path               | Description
---------|--------|--------------------|------------
-Order   | GET    | /api/orders        | Get all orders
-Order   | GET    | /api/orders/{id}   | Get an order
-Order   | POST   | /api/orders        | Create a new order and update the stock
-Stock   | GET    | /api/articles      | Get all articles
-Stock   | GET    | /api/articles/{id} | Get an article
-Stock   | PUT    | /api/articles      | Update an article
+Service | Method | Path                                    | Description
+--------|--------|-----------------------------------------|------------
+Both    | GET    | http://localhost:8080/api/reset         | Reset all business data
+Order   | GET    | http://localhost:8080/api/orders        | Get all orders
+Order   | GET    | http://localhost:8080/api/orders/{id}   | Get an order
+Order   | POST   | http://localhost:8080/api/orders        | Create a new order and update the stock
+Stock   | GET    | http://localhost:8080/api/articles      | Get all articles
+Stock   | GET    | http://localhost:8080/api/articles/{id} | Get an article
+Stock   | PUT    | http://localhost:8080/api/articles      | Update an article
 
 In addition the technical URL are:
 

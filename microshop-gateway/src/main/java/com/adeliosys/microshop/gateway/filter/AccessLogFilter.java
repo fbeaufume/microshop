@@ -31,7 +31,7 @@ public class AccessLogFilter implements GlobalFilter {
         return chain.filter(exchange).doAfterTerminate(() -> {
                     long duration = System.currentTimeMillis() - start;
                     if (threshold >= 0 && duration >= threshold) {
-                        LOGGER.info("Served {} '{}' as {} in {} msec",
+                        LOGGER.info("Routed {} '{}' as {} in {} msec",
                                 exchange.getRequest().getMethod(),
                                 exchange.getRequest().getURI(),
                                 exchange.getResponse().getStatusCode().value(),

@@ -40,15 +40,13 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     // Do not use data.sql as it is usually not sequence friendly
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        initData();
+    }
+
+    public void initData() {
         LOGGER.info("Initializing the database");
 
         repository.deleteAll();
-
-        Order order = new Order("John Doe", OrderStatus.VALIDATED,
-                Arrays.asList(
-                        new LineItem("1", 10.0d, 1),
-                        new LineItem("3", 100.0d, 1)));
-        repository.save(order);
     }
 
     public Iterable<Order> getOrders() {

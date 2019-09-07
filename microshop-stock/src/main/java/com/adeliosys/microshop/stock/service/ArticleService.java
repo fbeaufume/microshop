@@ -26,13 +26,12 @@ public class ArticleService {
     public void initData() {
         LOGGER.info("Initializing the database");
 
-        List<Article> articles = Arrays.asList(
-                new Article("1", "CD", 10.0d, 10),
-                new Article("2", "Scarf", 30.0d, 10),
-                new Article("3", "Blender", 100.0d, 10)
-        );
+        repository.deleteAll();
 
-        repository.saveAll(articles);
+        repository.saveAll(Arrays.asList(
+                new Article("1", "CD", 10.0d, 1000),
+                new Article("2", "Scarf", 30.0d, 1000),
+                new Article("3", "Blender", 100.0d, 1000)));
     }
 
     public List<Article> getArticles() {

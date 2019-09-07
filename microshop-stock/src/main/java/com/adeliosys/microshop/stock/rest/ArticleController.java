@@ -16,6 +16,12 @@ public class ArticleController {
         this.service = service;
     }
 
+    @GetMapping("/articles/reset")
+    public String resetArticles() {
+        service.initData();
+        return "ok";
+    }
+
     @GetMapping("/articles")
     public List<Article> getArticles() {
         return service.getArticles();
