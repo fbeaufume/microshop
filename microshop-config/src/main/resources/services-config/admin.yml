@@ -1,1 +1,4 @@
 server.port: 8090
+
+# Disable Zipkin since it is not correctly displayed (Zipkin server actuators are non standard)
+spring.boot.admin.discovery.ignored-services: zipkin
