@@ -60,7 +60,7 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     /**
      * Create a new order and update the stock.
      */
-    @HystrixCommand(fallbackMethod = "createOrderFallback")
+    @HystrixCommand(fallbackMethod = "createOrderFallback", ignoreExceptions = NotEnoughException.class)
     public Order createOrder(Order order) {
         order.setStatus(OrderStatus.VALIDATED);
         logOrderCreation(order);
@@ -74,6 +74,8 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
                         Article.class, item.getProductId(), item.getQuantity());
                 item.setPrice(article.getPrice());
             } catch (HttpClientErrorException e) {
+                // Caught when the stock service returned a BAD REQUEST status
+                // meaning that there is not enough articles
                 throw new NotEnoughException(Article.class);
             } catch (RestClientException e) {
                 throw new ServerException("Failed to call the stock service: " + e.toString());
@@ -90,6 +92,6 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void logOrderCreation(Order order) {
-        LOGGER.info("Creating {} order with {} articles for '{}'", order.getStatus(), order.countItems(), order.getUsername());
+        LOGGER.info("Creating {} order with {} article{} for '{}'", order.getStatus(), order.countItems(), order.countItems() > 1 ? "s" : "", order.getUsername());
     }
 }
