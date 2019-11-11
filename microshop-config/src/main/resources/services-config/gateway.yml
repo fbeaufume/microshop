@@ -17,3 +17,7 @@ spring:
           uri: lb://stock/
           predicates:
             - Path=/api/articles/**
+
+logging:
+  level:
+    org.springframework.cloud.config.client.ConfigServicePropertySourceLocator: WARN

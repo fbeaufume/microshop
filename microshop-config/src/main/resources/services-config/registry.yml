@@ -5,3 +5,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+
+logging:
+  level:
+    com.netflix.eureka.registry.AbstractInstanceRegistry: WARN
+    com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl: WARN

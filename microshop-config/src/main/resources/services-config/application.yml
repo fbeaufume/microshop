@@ -53,3 +53,4 @@ logging:
     ROOT: INFO
 #    org.springframework: DEBUG
 #    org.springframework.cloud: DEBUG
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
