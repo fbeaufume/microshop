@@ -11,19 +11,15 @@ import com.adeliosys.microshop.order.repository.OrderRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-
 @Service
 @Transactional
-public class OrderService implements ApplicationListener<ContextRefreshedEvent> {
+public class OrderService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
 
@@ -34,13 +30,6 @@ public class OrderService implements ApplicationListener<ContextRefreshedEvent> 
     public OrderService(RestTemplate restTemplate, OrderRepository repository) {
         this.restTemplate = restTemplate;
         this.repository = repository;
-    }
-
-    // Do not use a @PostConstruct method as it does not support @Transaction natively
-    // Do not use data.sql as it is usually not sequence friendly
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        initData();
     }
 
     public void initData() {

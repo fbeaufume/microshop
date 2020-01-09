@@ -1,10 +1,11 @@
 package com.adeliosys.microshop.stock.model;
 
 import com.adeliosys.microshop.common.exception.NotEnoughException;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Article {
 
     @Id

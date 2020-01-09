@@ -16,6 +16,11 @@ management:
 server.servlet.session.cookie.name: JSESSIONID_${spring.application.name}
 
 spring:
+  # Uncomment to add logging
+#  datasource.url: jdbc:h2:mem:testdb;TRACE_LEVEL_FILE=4
+  h2.console.enabled: true
+  jpa:
+    open-in-view: true
   cloud:
     config:
       # Allow local configuration such as system properties, to override the server config, convenient for server.port
@@ -47,7 +52,7 @@ logging:
   pattern.console: ${CONSOLE_LOG_PATTERN:%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
   # Sample output: 14:42:56.692  INFO [           main] o.apache.catalina.core.StandardService   Starting service [Tomcat]
   # Even shorter custom pattern (same as previous, removed thread, shortened the logger name), uncomment if needed
-  #  pattern.console: ${CONSOLE_LOG_PATTERN:%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(%-20.20logger{19}){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+#  pattern.console: ${CONSOLE_LOG_PATTERN:%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(%-20.20logger{19}){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
   # Sample output: 14:45:24.632  INFO .c.c.StandardService Starting service [Tomcat]
   level:
     ROOT: INFO

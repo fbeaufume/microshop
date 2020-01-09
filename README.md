@@ -9,7 +9,7 @@ Requires Java 8+ and Maven 3.5+.
 ## Features
 
 Currently implemented :
-- Two basic business services with an in-memory database (H2 and MongoDB)
+- Two basic business services with an in-memory H2 database
 - Common utility module with logs of slow HTTP requests
 - Config server, based on Spring Cloud Config
 - Service registry, based on Spring Cloud Netflix Eureka
@@ -30,7 +30,7 @@ The business services:
   - Spring Boot app on port `8081` by default
 - `microshop-stock`:
   - Articles stock, used by the order service
-  - Uses an embedded in-memory MongoDB database that is reset each time the service starts
+  - Uses an embedded in-memory H2 database that is reset each time the service starts
   - Spring Boot app on port `8082` by default
 
 The technical services:
