@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Log the duration of requests slower than a certain threshold.
+ * <p/>
+ * This filter should use a high precedence, but lower than Spring Cloud Sleuth,
+ * see {@link org.springframework.cloud.sleuth.instrument.web.TraceWebServletAutoConfiguration}
+ */
 @Component
-// Should use the highest precedence possible, but lower than Spring Cloud Sleuth
-// (see org.springframework.cloud.sleuth.instrument.web.TraceWebServletAutoConfiguration)
-@Order(Ordered.HIGHEST_PRECEDENCE + 1000)
+@Order(Ordered.HIGHEST_PRECEDENCE + 10)
 public class AccessLogFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessLogFilter.class);
