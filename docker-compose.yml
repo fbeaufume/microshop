@@ -1,0 +1,56 @@
+version: "3"
+services:
+  microshop-config:
+    build:
+      context: microshop-config
+    image: microshop-config
+    ports:
+      - 8888:8888
+  microshop-registry:
+    build:
+      context: microshop-registry
+    image: microshop-registry
+    ports:
+      - 8761:8761
+    environment:
+      - CONFIG_SERVER_URL=http://microshop-config:8888/
+    depends_on:
+      - microshop-config
+  microshop-order:
+    build:
+      context: microshop-order
+    image: microshop-order
+    ports:
+      - 8081:8081
+    environment:
+      - CONFIG_SERVER_URL=http://microshop-config:8888/
+      - REGISTRY_URL=http://microshop-registry:8761/eureka/
+    depends_on:
+      - microshop-config
+      - microshop-registry
+  microshop-stock:
+    build:
+      context: microshop-stock
+    image: microshop-stock
+    ports:
+      - 8082:8082
+    environment:
+      - CONFIG_SERVER_URL=http://microshop-config:8888/
+      - REGISTRY_URL=http://microshop-registry:8761/eureka/
+    depends_on:
+      - microshop-config
+      - microshop-registry
+  microshop-gateway:
+    build:
+      context: microshop-gateway
+    image: microshop-gateway
+    ports:
+      - 8080:8080
+    environment:
+      - CONFIG_SERVER_URL=http://microshop-config:8888/
+      - REGISTRY_URL=http://microshop-registry:8761/eureka/
+    depends_on:
+      - microshop-config
+      - microshop-registry
+      - microshop-order
+      - microshop-stock

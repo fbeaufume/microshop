@@ -3,4 +3,6 @@ spring:
   main.banner-mode: "off"
   cloud.config:
     fail-fast: true
-    uri: http://localhost:8888/
+    uri: ${CONFIG_SERVER_URL:http://localhost:8888/}
+    retry:
+      max-attempts: 30

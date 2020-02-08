@@ -20,6 +20,8 @@ Currently implemented :
 - Distributed tracing, based on Spring Cloud Zipkin and Zipkin server
 - Configurable tracing of business methods
 - Admin interface, based on Spring Boot Admin
+- Docker and Docker Compose support
+- Postman support
 
 ## Services
 
@@ -92,6 +94,10 @@ To launch additional business service instances change the HTTP using for exampl
 `mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8083`
 (or `java -jar target/<service>.jar --server.port=8083`).
 
+To start the whole application with **Docker**, build the modules then run `docker-compose up`
+from the root folder. Note that, to reduce startup time and memory usage, this will
+not start all services but only the core ones (config, registry, order, stock, gateway).
+
 The business URL are:
 
 Service | Method | Path                                    | Description
@@ -115,15 +121,13 @@ http://localhost:8090/                  | Spring Boot Admin UI
 http://localhost:7979/hystrix           | Hystrix Dashboard, then use http://localhost:8081/actuator/hystrix.stream
 http://localhost:9411/zipkin            | Zipkin UI
 
-A Postman configuration file is also provided for convenience in the `postman` folder.
+A **Postman** configuration file is also provided for convenience in the `postman` folder.
 
 ## Next steps
 
 Not yet implemented:
-- Replace Ribbon by Spring Cloud Loadbalancer,
-  see https://spring.io/blog/2018/12/12/spring-cloud-greenwich-rc1-available-now
-  and https://piotrminkowski.wordpress.com/2019/04/05/the-future-of-spring-cloud-microservices-after-netflix-era/
-- Replace Hystrix by Resilience4j, see previous links
+- Replace Ribbon by Spring Cloud Loadbalancer
+- Replace Hystrix by Resilience4j, but Resilience4j fallback management is not so great
 - Hot configuration reload
 - Technical services security
 - Business services security
